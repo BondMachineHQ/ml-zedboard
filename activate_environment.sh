@@ -1,0 +1,1 @@
+conda activate hls4ml-env

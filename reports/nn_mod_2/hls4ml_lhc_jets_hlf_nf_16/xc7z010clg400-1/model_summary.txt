@@ -1,0 +1,20 @@
+Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ fc1 (Dense)                 (None, 1)                 17        
+                                                                 
+ relu1 (Activation)          (None, 1)                 0         
+                                                                 
+ fc2 (Dense)                 (None, 32)                64        
+                                                                 
+ relu2 (Activation)          (None, 32)                0         
+                                                                 
+ output (Dense)              (None, 5)                 165       
+                                                                 
+ softmax (Activation)        (None, 5)                 0         
+                                                                 
+=================================================================
+Total params: 246
+Trainable params: 246
+Non-trainable params: 0

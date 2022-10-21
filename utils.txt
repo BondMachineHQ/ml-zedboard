@@ -1,0 +1,4 @@
+# export protobuf correctly to be converted in nnef
+cd  /home/administrator@physics.ad.cloud.unipg.it/anaconda3/envs/hls4ml-env/lib/python3.8/site-packages/tensorflow
+python3 python/tools/freeze_graph.py --input_meta_graph=/home/administrator@physics.ad.cloud.unipg.it/Progetti/hls4ml-fpga/models/hls4ml_lhc_jets_hlf_KERAS_model.meta --input_checkpoint=/home/administrator@physics.ad.cloud.unipg.it/Progetti/hls4ml-fpga/models/hls4ml_lhc_jets_hlf/training/cp.ckpt --output_graph=/tmp/keras_frozen.pb --output_node_names="softmax/Softmax" --input_binary=true
+

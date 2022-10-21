@@ -1,0 +1,1 @@
+conda create --name hls4ml-env python=3.8.0

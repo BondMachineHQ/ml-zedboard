@@ -1,0 +1,21 @@
+{
+    "network": {
+        "arch": [
+            {
+                "layer_name": "l1",
+                "activation_function": "linear",
+                "neurons": 1
+            }
+        ],
+        "training": {
+            "epochs": 500,
+            "optimizer": "Adam",
+            "loss": "categorical_crossentropy",
+            "metrics": "accuracy",
+            "learning_rate": 0.0001,
+            "batch_size": "default",
+            "validation_split": "default",
+            "shuffle": "true"
+        }
+    }
+}
