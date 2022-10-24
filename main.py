@@ -470,7 +470,7 @@ class Trainer:
         
         self.dump_json_for_bondmachine()
         self.get_json_model()
-        self.build_graph()
+        #self.build_graph()
         
         #print(bcolors.OKGREEN + " # input name", self.model.input.op.name+bcolors.WHITE)
         #print(bcolors.OKGREEN + " # output name", self.model.output.op.name+bcolors.WHITE)
