@@ -151,16 +151,6 @@ class Trainer:
                     self.model.add(Dense(i, input_shape=(self.X_train_val.shape[1],)))
                 for i in reversed(range(0, 24, 3)):
                     self.model.add(Dense(i, input_shape=(self.X_train_val.shape[1],)))
-                # self.model.add(Dense(10, input_shape=(self.X_train_val.shape[1],)))
-                # self.model.add(Dense(15, input_shape=(self.X_train_val.shape[1],)))
-                # self.model.add(Dense(20, input_shape=(self.X_train_val.shape[1],)))
-                # self.model.add(Dense(15, input_shape=(self.X_train_val.shape[1],)))
-                # self.model.add(Dense(10, input_shape=(self.X_train_val.shape[1],)))
-                #for i in range(1, 2):
-                #    self.model.add(Dense(i, input_shape=(self.X_train_val.shape[1],)))
-                # self.model.add(Activation(activation='relu'))
-                # self.model.add(Dense(8, name='fc2', kernel_initializer='lecun_uniform', kernel_regularizer=l1(0.0001)))
-                # self.model.add(Activation(activation='relu'))
                 opt = Adam(lr=0.0001)
             else:
                 arch = self.network_spec["network"]["arch"]
@@ -172,7 +162,6 @@ class Trainer:
                         self.model.add(Dense(neurons, input_shape=(self.X_train_val.shape[1],), kernel_regularizer=l1(0.0001)))
                     else:
                         self.model.add(Dense(neurons, activation=activation_function, name=layer_name, kernel_regularizer=l1(0.0001)))
-                    #self.model.add(Activation(activation=activation_function))
 
                 if  self.network_spec["network"]["training"]["optimizer"] == "Adam":
                     opt = Adam(lr=0.0001)
@@ -180,13 +169,9 @@ class Trainer:
                     opt = Adagrad(lr=0.0001)
                 else:
                     opt = Adam(lr=0.0001)
-                # handle more opt
-                
                 
             self.model.add(Dense(self.classes_len, activation='softmax'))
             self.model.compile(optimizer=opt, loss=['categorical_crossentropy'], metrics=['accuracy'])
-
-        # WIP: to handle more model type
 
     def get_json_model(self):
 
@@ -499,13 +484,9 @@ class Trainer:
         y_keras = self.model.predict(self.X_test)
         np.save("datasets/"+self.dataset+'_y_keras.npy', y_keras)
         self.dump_csv_prediction(y_keras)
-        #np.savetxt("datasets/"+self.dataset+'_swprediction.csv', y_keras, delimiter=",")
-        # print(self.X_test)
         accuracy = format(accuracy_score(np.argmax(self.y_test, axis=1), np.argmax(y_keras, axis=1)))
         print(bcolors.OKGREEN + " # INFO: Accuracy is "+accuracy+bcolors.WHITE)
         print("Model has been exported in JSON for Bondmachine (path is: models/"+self.dataset+"/modelBM.json)")
-        #user_reply = input(bcolors.WARNING + " # QUESTION: Model has been exported in JSON for Bondmachine (path is: models/"+self.dataset+"/modelBM.json), do you want to continue with HLS4ML? (y/n)"+bcolors.WHITE)
-        #if user_reply != "y":
         sys.exit(0)
             
         input(bcolors.OKGREEN+" # INFO: press enter to continue"+bcolors.WHITE)
