@@ -489,6 +489,7 @@ class Trainer:
         fields = ['probability_0', 'probability_1', 'classification'] 
 
         with open("datasets/"+self.dataset+'_swprediction.csv', 'w') as f:
+            print("Sofware predicions have been exported in CSV (path is: datasets/"+self.dataset+"_swprediction.csv)")
             write = csv.writer(f)
             write.writerow(fields)
             write.writerows(results)
@@ -502,7 +503,7 @@ class Trainer:
         # print(self.X_test)
         accuracy = format(accuracy_score(np.argmax(self.y_test, axis=1), np.argmax(y_keras, axis=1)))
         print(bcolors.OKGREEN + " # INFO: Accuracy is "+accuracy+bcolors.WHITE)
-        print("Model has been exported in JSON for Bondmachine (path is: models/"+self.dataset+"/modelBM.json")
+        print("Model has been exported in JSON for Bondmachine (path is: models/"+self.dataset+"/modelBM.json)")
         #user_reply = input(bcolors.WARNING + " # QUESTION: Model has been exported in JSON for Bondmachine (path is: models/"+self.dataset+"/modelBM.json), do you want to continue with HLS4ML? (y/n)"+bcolors.WHITE)
         #if user_reply != "y":
         sys.exit(0)
