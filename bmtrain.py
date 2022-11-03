@@ -79,6 +79,14 @@ class Trainer:
         tf.random.set_random_seed(self.seed)
         os.environ['PATH'] = self.vivado_path + os.environ['PATH']
 
+    def dump_test_dataset_for_bmsim(self) -> None:
+        
+        import csv
+
+        with open("datasets/"+self.dataset+'_sample.csv', 'w') as f:
+            write = csv.writer(f)
+            write.writerows(self.X_test)
+
     def setup_data(self, dataset) -> None:
 
         if dataset not in self.available_datasets:
@@ -101,8 +109,8 @@ class Trainer:
             data = fetch_openml(dataset)
             x_data, y_data = data['data'], data['target']
             
-            x_data.to_csv("datasets/"+dataset+'_raw_x_data.csv', index=False)
-            y_data.to_csv("datasets/"+dataset+'_raw_y_data.csv', index=False)
+            #x_data.to_csv("datasets/"+dataset+'_raw_x_data.csv', index=False)
+            #y_data.to_csv("datasets/"+dataset+'_raw_y_data.csv', index=False)
 
             y = self.le.fit_transform(y_data)
             unique = np.unique(y)
@@ -130,6 +138,7 @@ class Trainer:
             self.y_test = np.load("datasets/"+dataset+'_y_test.npy')
             self.classes = np.load("datasets/"+dataset+'_classes.npy', allow_pickle=True)
             
+        self.dump_test_dataset_for_bmsim()
 
     def parse_network_specifics(self):
         
