@@ -499,34 +499,3 @@ class Trainer:
         sys.exit(0)
             
         input(bcolors.OKGREEN+" # INFO: press enter to continue"+bcolors.WHITE)
-
-    def build_model_fpga(self):
-        config = hls4ml.utils.config_from_keras_model(self.model, granularity='name')
-        
-        print(bcolors.OKGREEN + " # INFO: Is using part number "+str(self.use_part)+bcolors.WHITE)
-        print(bcolors.OKGREEN + " # INFO: fpga part number     "+self.fpga_part_number+bcolors.WHITE)
-
-        if self.use_part == True:
-            self.hls_model = hls4ml.converters.convert_from_keras_model(
-                                                        self.model,
-                                                        backend='VivadoAccelerator',
-                                                        io_type='io_stream',
-                                                        hls_config=config,
-                                                        output_dir='models_fpga/'+self.dataset+'_hls4ml_prj',
-                                                        part=self.fpga_part_number)
-        else:
-            self.hls_model = hls4ml.converters.convert_from_keras_model(
-                                                        self.model,
-                                                        backend='VivadoAccelerator',
-                                                        io_type='io_stream',
-                                                        hls_config=config,
-                                                        output_dir='models_fpga/'+self.dataset+'_hls4ml_prj',
-                                                        board=self.fpga_part_number)
-
-        self.hls_model.compile()
-        supported_boards = hls4ml.templates.get_supported_boards_dict().keys()
-        print(bcolors.OKGREEN + " # Supported boards: "+str(supported_boards)+bcolors.WHITE)
-        hls4ml.templates.get_backend('VivadoAccelerator').create_initial_config()
-        self.hls_model.build(csim=False, synth=True, export=True)
-        #hls4ml.templates.VivadoAcceleratorBackend.make_bitfile(self.hls_model)
-
