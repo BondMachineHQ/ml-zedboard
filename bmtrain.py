@@ -314,16 +314,6 @@ class Trainer:
                                 }
                     weights.append(weight_info)
 
-
-            # for j in range(0, len(flat_layer_weigth)):
-            #     weight_info = {
-            #         "Layer": i,
-            #         "PosCurrLayer": j,
-            #         "PosPrevLayer": i,
-            #         "Value": flat_layer_weigth[j]
-            #     }
-            #     weights.append(weight_info)
-
         to_dump["Nodes"] = nodes
         to_dump["Weights"] = weights
 
